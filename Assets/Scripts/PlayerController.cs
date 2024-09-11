@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;  // Required for scene management
 
 public class PlayerController : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private int originalScore;   // To store the initial score value
 
     private Rigidbody rb;
+    public Text scoreText;       // UI Text to display the score
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,9 @@ public class PlayerController : MonoBehaviour
         // Store the initial values of health and score
         originalHealth = health;
         originalScore = score;
+
+        // Update the score UI at the start of the game
+        SetScoreText();
     }
 
     // FixedUpdate is called at a fixed interval, best for handling physics
@@ -45,8 +50,8 @@ public class PlayerController : MonoBehaviour
         {
             // Increment the score
             score++;
-            // Log the new score
-            Debug.Log($"Score: {score}");
+            // Update the score text on the UI
+            SetScoreText();
             // Disable the Coin object
             other.gameObject.SetActive(false);
         }
@@ -56,8 +61,6 @@ public class PlayerController : MonoBehaviour
             health--;
             // Log the new health value
             Debug.Log($"Health: {health}");
-            // Optionally, disable or destroy the Trap object if needed
-            // other.gameObject.SetActive(false);
         }
         else if (other.CompareTag("Goal"))
         {
@@ -80,6 +83,15 @@ public class PlayerController : MonoBehaviour
             // Reset health and score
             health = originalHealth;
             score = originalScore;
+
+            // Update the score UI after resetting
+            SetScoreText();
         }
+    }
+
+    // Method to update the score UI
+    void SetScoreText()
+    {
+        scoreText.text = "Score: " + score.ToString();
     }
 }
