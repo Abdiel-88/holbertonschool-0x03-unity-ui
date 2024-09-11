@@ -91,8 +91,18 @@ public class PlayerController : MonoBehaviour
     {
         if (health <= 0)
         {
-            // Log the game over message
-            Debug.Log("Game Over!");
+            // Display "Game Over!" message on the UI
+            winLoseText.text = "Game Over!";
+            winLoseText.color = Color.white; // Set text color to white
+
+            // Change the background color to red
+            winLoseBG.color = Color.red;
+
+            // Uncomment or remove the debug line
+            // Debug.Log("Game Over!");
+
+            // Activate the Win/Lose UI elements
+            winLoseBG.gameObject.SetActive(true);
 
             // Reload the current scene
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
