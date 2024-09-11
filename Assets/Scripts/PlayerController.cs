@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     public Text scoreText;       // UI Text to display the score
     public Text healthText;      // UI Text to display the health
+    public Text winLoseText;     // UI Text for win/lose message
+    public Image winLoseBG;      // UI background for win/lose message
 
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,9 @@ public class PlayerController : MonoBehaviour
         // Update the score and health UI at the start of the game
         SetScoreText();
         SetHealthText();
+
+        // Ensure WinLoseBG is inactive at the start
+        winLoseBG.gameObject.SetActive(false);
     }
 
     // FixedUpdate is called at a fixed interval, best for handling physics
@@ -66,8 +71,18 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.CompareTag("Goal"))
         {
-            // Log the winning message
-            Debug.Log("You win!");
+            // Display "You Win!" message on the UI
+            winLoseText.text = "You Win!";
+            winLoseText.color = Color.black; // Set text color to black
+
+            // Change the background color to green
+            winLoseBG.color = Color.green;
+
+            // Uncomment or remove the debug line
+            // Debug.Log("You win!");
+
+            // Activate the Win/Lose UI elements
+            winLoseBG.gameObject.SetActive(true);
         }
     }
 
