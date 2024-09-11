@@ -78,11 +78,11 @@ public class PlayerController : MonoBehaviour
             // Change the background color to green
             winLoseBG.color = Color.green;
 
-            // Uncomment or remove the debug line
-            // Debug.Log("You win!");
-
             // Activate the Win/Lose UI elements
             winLoseBG.gameObject.SetActive(true);
+
+            // Start coroutine to reload the scene after 3 seconds
+            StartCoroutine(LoadScene(3));
         }
     }
 
@@ -98,22 +98,11 @@ public class PlayerController : MonoBehaviour
             // Change the background color to red
             winLoseBG.color = Color.red;
 
-            // Uncomment or remove the debug line
-            // Debug.Log("Game Over!");
-
             // Activate the Win/Lose UI elements
             winLoseBG.gameObject.SetActive(true);
 
-            // Reload the current scene
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-
-            // Reset health and score
-            health = originalHealth;
-            score = originalScore;
-
-            // Update the score and health UI after resetting
-            SetScoreText();
-            SetHealthText();
+            // Start coroutine to reload the scene after 3 seconds
+            StartCoroutine(LoadScene(3));
         }
     }
 
@@ -127,5 +116,23 @@ public class PlayerController : MonoBehaviour
     void SetHealthText()
     {
         healthText.text = "Health: " + health.ToString();
+    }
+
+    // Coroutine to reload the scene after a delay
+    IEnumerator LoadScene(float seconds)
+    {
+        // Wait for the specified number of seconds
+        yield return new WaitForSeconds(seconds);
+
+        // Reload the current scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+
+        // Reset health and score after reloading
+        health = originalHealth;
+        score = originalScore;
+
+        // Update the score and health UI after resetting
+        SetScoreText();
+        SetHealthText();
     }
 }
