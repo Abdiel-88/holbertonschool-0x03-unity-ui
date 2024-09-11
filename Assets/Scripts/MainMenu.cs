@@ -10,4 +10,14 @@ public class MainMenu : MonoBehaviour
         // Load the maze scene
         SceneManager.LoadScene("maze");
     }
+
+    public void QuitMaze()
+    {
+        // Log quit message (works in editor)
+        Debug.Log("Quit Game");
+
+        // Quit the application (only works in build)
+        Application.Quit();
+    }
 }
+
