@@ -91,18 +91,19 @@ public class PlayerController : MonoBehaviour
     {
         if (health <= 0)
         {
-            // Display "Game Over!" message on the UI
-            winLoseText.text = "Game Over!";
-            winLoseText.color = Color.white; // Set text color to white
+           // Display "Game Over!" message and reload scene
+        winLoseText.text = "Game Over!";
+        winLoseText.color = Color.white;
+        winLoseBG.color = Color.red;
+        winLoseBG.gameObject.SetActive(true);
+        StartCoroutine(LoadScene(3));
+        }
 
-            // Change the background color to red
-            winLoseBG.color = Color.red;
-
-            // Activate the Win/Lose UI elements
-            winLoseBG.gameObject.SetActive(true);
-
-            // Start coroutine to reload the scene after 3 seconds
-            StartCoroutine(LoadScene(3));
+        // Check if the player presses the Esc key
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+        // Load the menu scene
+        SceneManager.LoadScene("menu");
         }
     }
 
