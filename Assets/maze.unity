@@ -4517,9 +4517,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558aa611254671f40ab0d5e6733da376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 17
   health: 5
   scoreText: {fileID: 1684184843}
+  healthText: {fileID: 1288992258}
 --- !u!1 &1214845787
 GameObject:
   m_ObjectHideFlags: 0

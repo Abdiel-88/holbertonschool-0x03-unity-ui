@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody rb;
     public Text scoreText;       // UI Text to display the score
+    public Text healthText;      // UI Text to display the health
 
     // Start is called before the first frame update
     void Start()
@@ -25,8 +26,9 @@ public class PlayerController : MonoBehaviour
         originalHealth = health;
         originalScore = score;
 
-        // Update the score UI at the start of the game
+        // Update the score and health UI at the start of the game
         SetScoreText();
+        SetHealthText();
     }
 
     // FixedUpdate is called at a fixed interval, best for handling physics
@@ -59,8 +61,8 @@ public class PlayerController : MonoBehaviour
         {
             // Decrement the health
             health--;
-            // Log the new health value
-            Debug.Log($"Health: {health}");
+            // Update the health text on the UI
+            SetHealthText();
         }
         else if (other.CompareTag("Goal"))
         {
@@ -84,8 +86,9 @@ public class PlayerController : MonoBehaviour
             health = originalHealth;
             score = originalScore;
 
-            // Update the score UI after resetting
+            // Update the score and health UI after resetting
             SetScoreText();
+            SetHealthText();
         }
     }
 
@@ -93,5 +96,11 @@ public class PlayerController : MonoBehaviour
     void SetScoreText()
     {
         scoreText.text = "Score: " + score.ToString();
+    }
+
+    // Method to update the health UI
+    void SetHealthText()
+    {
+        healthText.text = "Health: " + health.ToString();
     }
 }
